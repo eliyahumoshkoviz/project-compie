@@ -17,11 +17,11 @@ export class Areas {
   @Column()
   description: string;
 
-  @Column({ type: 'json', nullable: true })
-  polygon_data: any;
+  @Column()
+  country: string;
 
-  @Column({ type: 'varchar', length: 50, nullable: true })
-  polygon_type: string;
+  @Column()
+  population: number;
 
   @CreateDateColumn()
   created_at: Date;

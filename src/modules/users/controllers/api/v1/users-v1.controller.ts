@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Headers, Param, Patch, Post, Session, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Session, UseGuards } from '@nestjs/common';
 import { AdminGuard } from 'src/guards/authentication/dto/admin.guard';
 import { AuthGuard } from 'src/guards/authentication/dto/auth.guard copy';
 import { CreateUserDto } from 'src/modules/users/models/dto/create-user.dto';
@@ -36,13 +36,13 @@ export class UsersController {
 
   @Get()
   @UseGuards(AuthGuard)
-  async getAllUsers(@Headers('Authorization') token: string) {
+  async getAllUsers() {
     return this.usersService.find();
   }
 
   @Get('/single/:id')
   @UseGuards(AuthGuard)
-  async findUserById(@Headers('Authorization') token: string, @Param('id') id: number) {
+  async findUserById(@Param('id') id: number) {
     return this.usersService.findById(id);
   }
 

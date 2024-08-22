@@ -8,6 +8,7 @@ import { HealthModule } from './modules/app/health/health.module';
 import { CoreModule } from './core/core.module';
 import { UsersModule } from './modules/users/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AreasModule } from './modules/areas/areas.module';
 const cookieSession = require('cookie-session')
 
 @Module({
@@ -24,6 +25,7 @@ const cookieSession = require('cookie-session')
     HealthModule,
     AppConfigModule,
     UsersModule,
+    AreasModule,
     // ExampleModule,
   ],
   exports: [],
