@@ -1,7 +1,9 @@
+import { Places } from 'src/modules/places/models/domain/places.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -28,6 +30,9 @@ export class Areas {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Places, (place) => place.area_id)
+  places: Places[];
 }
 
 

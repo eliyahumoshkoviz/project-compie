@@ -10,36 +10,42 @@ import { AdminGuard } from 'src/guards/authentication/dto/admin.guard';
 @Controller('area')
 @UseGuards(AuthGuard)
 export class AreasController {
-  constructor(private AreasService: AreasService) { }
+  constructor(private readonly areasService: AreasService) { }
 
   @Post('/createArea')
   async createArea(@Body() body: CreateAreaDto) {
-    return this.AreasService.create(body.name, body.description, body.country, body.population);
+    return this.areasService.create({
+      name: body.name,
+      description: body.description,
+      country: body.country,
+      population: body.population,
+    });
   }
 
   @Get()
-  async getAllAreas() { return this.AreasService.find(); }
+  async getAllAreas() {
+    return this.areasService.find();
+  }
 
   @Get('/search')
   async sortArea(@Query() query: SearchAreaDto) {
-    return this.AreasService.find(query);
+    return this.areasService.find(query);
   }
 
   @Get('/single/:id')
   async findAreaById(@Param('id') id: number) {
-    return this.AreasService.findById(id);
+    return this.areasService.findById(id);
   }
 
   @Patch('/:id')
   @UseGuards(EditorGuard)
-  updateArea(@Param('id') id: number, @Body() body: UpdateAreaDto) {
-    return this.AreasService.update(id, body)
+  async updateArea(@Param('id') id: number, @Body() body: UpdateAreaDto) {
+    return this.areasService.update(id, body);
   }
 
   @Delete('/:id')
   @UseGuards(AdminGuard)
-  removeArea(@Param('id') id: number) {
-    return this.AreasService.remove(id)
+  async removeArea(@Param('id') id: number) {
+    return this.areasService.remove(id);
   }
-
 }
